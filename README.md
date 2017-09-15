@@ -14,7 +14,7 @@
    
   function rec(){
       
-    var mychar="hia hia hia";
+    var mychar="thank you very much";
 
 alert(mychar);
   
