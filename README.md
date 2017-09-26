@@ -23,7 +23,7 @@ alert(mychar);
 <body>
 
      <input name="button" type="button" onClick="rec()" 
-           value="shixiong，click it please！" />
+           value="click it please！" />
 
 </body>
 
