@@ -1,0 +1,16 @@
+
+.page{
+	margin-top: 50px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	height: 100%;
+	width: 100%;
+    position: absolute;       /* 若为fixed 固定定位，不占位，可能会覆盖下面内容*/ 
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: block;
+	margin: initial;
+ 
+}
