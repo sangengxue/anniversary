@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>周年纪念册</title>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<!--鼠标控制速度页 -->
+		<script src='js/libs.min.js'></script>
+  		<script src="js/index.js"></script>
+  		<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+  		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+
+<style>
+	/*拥抱式相册页*/
+	#canvas {
+		width:100%;height:100%;background-image:url(img/5.jpg);background-position: center center;background-size: cover;
+		
+	/*滚动照片老婆*/
+		#div_pointer{cursor:pointer;}
+	/*拼图照片*/
+		.description{
+			position:fixed;right:10px;top:10px;font-size:12px;color:#888;
+		}
+		span.reference{
+			position:fixed;left:10px;bottom:10px;font-size:12px;
+		}
+		span.reference a{
+			color:#888;text-transform:uppercase;text-decoration:none;padding-right:20px;
+		}
+		span.reference a:hover{
+			color:#444;
+		}
+		
+				
+	
+</style>		
+			
+			
+</head>
+<body style="overflow-x:hidden">
+	
+	<audio autoplay="autoplay" controls="controls"  preload="auto" loop="loop"
+            	src="img/video/01.mp3">
+	</audio>
+	<div class="container-fluid" style="padding: 0px;">	
+		
+<!--第1页：心动封面1-->	  
+		<div class="row">
+		<div class="col-md-12" style="width:100%;height:100%;background-image: url(img/1封面.jpg);background-position: center center;background-size: cover;">
+			<canvas></canvas> 
+	
+				<script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script> 
+				<script type="text/javascript">
+			      var canvas = document.querySelector("canvas");
+			      var ctx = canvas.getContext("2d");
+			      var ww = window.innerWidth;
+			      var wh = window.innerHeight;
+			
+			      var hearts = [];
+			
+			      function init(){
+			        requestAnimationFrame(render);
+			        canvas.width = ww;
+			        canvas.height = wh;
+			        for(var i = 0; i < 100; i++){
+			          hearts.push(new Heart());
+			        }
+			      }
+			
+			      function Heart() {
+			        this.x = Math.random() * ww;
+			        this.y = Math.random() * wh;
+			        this.opacity = (Math.random() * 0.5) + 0.5;
+			        this.vel = {
+			          x: (Math.random() - 0.5) * 4,
+			          y: (Math.random() - 0.5) * 4
+			        };
+			        this.targetScale = (Math.random() * 0.15) + 0.02;
+			        this.scale = this.targetScale * Math.random();
+			      }
+			
+			      Heart.prototype.update = function(){
+			        this.x += this.vel.x;
+			        this.y += this.vel.y;
+			
+			        this.scale += (this.targetScale - this.scale) * 0.01;
+			        if(this.x - this.width > ww || this.x + this.width < 0){
+			          this.scale = 0;
+			          this.x = Math.random() * ww;
+			        }
+			        if(this.y - this.height > wh || this.y + this.height < 0){
+			          this.scale = 0;
+			          this.y = Math.random() * wh;
+			        }
+			        this.width = 473.8 * this.scale;
+			        this.height = 408.6 * this.scale;
+			      }
+			      Heart.prototype.draw = function(){
+			        ctx.globalAlpha = this.opacity;
+			        ctx.drawImage(heartImage, this.x - this.width * 0.5, this.y - this.height * 0.5,this.width, this.height);
+			      }
+			
+			      function render(){
+			        ctx.clearRect(0, 0, ww, wh);
+			        // ctx.globalAlpha = 1;
+			        // ctx.fillStyle = "rgba(255,255,255,0.3)";
+			        // ctx.fillRect(0, 0, ww, wh);
+			        for(var i=0; i<100; i++){
+			          hearts[i].update();
+			          hearts[i].draw();
+			        }
+			        requestAnimationFrame(render);
+			      }
+			
+			      var heartImage = new Image();
+			      heartImage.onload = init();
+			      heartImage.src =  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NzMuOHB4IiBoZWlnaHQ9IjQwOC42cHgiIHZpZXdCb3g9IjAgMCA0NzMuOCA0MDguNiI+PHBhdGggZmlsbD0iI2QzMjkzMiIgZD0iTTQwNC42LDE2LjZDMzg1LjQsNi4xLDM2My41LDAsMzQwLDBjLTQxLjUsMC03OC41LDE4LjktMTAzLDQ4LjVDMjEyLjMsMTguOSwxNzUuMywwLDEzMy44LDAgYy0yMy4zLDAtNDUuMyw2LjEtNjQuNSwxNi42QzI3LjksMzkuNSwwLDgzLjQsMCwxMzMuOWMwLDE0LjQsMi40LDI4LjMsNi42LDQxLjJDMjkuNiwyNzguNCwyMzcsNDA4LjYsMjM3LDQwOC42IHMyMDcuMi0xMzAuMiwyMzAuMi0yMzMuNWM0LjMtMTIuOSw2LjYtMjYuOCw2LjYtNDEuMkM0NzMuOCw4My40LDQ0NS45LDM5LjYsNDA0LjYsMTYuNnoiLz48L3N2Zz4=";
+			
+			      window.addEventListener("resize",function(){
+			        ww = window.innerWidth;
+			        wh = window.innerHeight;
+			      })
+			
+			    </script> 
+			
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+				
+<!--第2页:封面2  -->
+		<div class="row">
+			<div class="col-md-12" >
+				<img style="width:100%;height:100%; background-position: center center;background-size: cover;" src="img/2.jpg"/>
+			
+			<div id="canvas1"></div>
+				<script src="js/protoclass.js"></script>
+				<script src="js/box2d.js"></script>
+				<script src="js/Main.js"></script>
+			</div>
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+
+<!--第3页 ：滚动式照片-老婆-->	
+		<div class="row">
+			<div class="col-md-12" style="width:100%;height:100%; background-image: url(img/3.jpg);
+			background-position: center center;background-size: cover;">
+			
+				<div class="col-md-4 ">
+					<div style="background-image: -webkit-linear-gradient(left,red,#66ffff 10%,#cc00ff 20%,#CC00CC 30%,
+						 #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+    					-webkit-text-fill-color: transparent;
+					    -webkit-background-clip: text;
+					    -webkit-background-size: 200% 100%; 
+					    -webkit-animation: masked-animation 4s linear infinite;
+					    font-size: 35px;"> 
+						<br><br><p>香香小宝贝之傲娇小公主高美眉~</p> 
+					</div> 
+					<div style="padding-left: 100px;">
+						<h3>——声明一下,这称号是老婆自封的！</h3>
+					</div>
+				</div>
+				
+				<div class="col-md-8">
+				<div style="margin-left: 5px;">
+				<script language="javascript">
+					window.onload=function()
+						{
+						var rt=new imgRound("imgContainer",250,400,420,40,380,0.007);
+						setInterval(function(){rt.roundMove()},20)
+						}
+					function imgRound(id,w,h,x,y,r,dv,rh,ah)
+					{
+							if (ah==undefined) ah=1;
+							if (rh==undefined) rh=10;
+							var dv=dv*ah; //旋转速度
+							var pi=3.1415926575;
+							var d=pi/2;
+							var pd=Math.asin(w/2/r);
+							var smove=true;
+							var imgArr=new Array();
+							var objectId=id;
+							var o=document.getElementById(objectId);
+							o.style.position="relative";
+							var arrimg=o.getElementsByTagName("img");
+							var pn=arrimg.length; //图片数量
+							var ed=pi*2/pn;
+						for (n=0;n<arrimg.length;n++)
+						{
+							var lk=arrimg[n].getAttribute("link");
+							if (lk!=null) arrimg[n].setAttribute("title",lk)
+							arrimg[n].onclick=function()
+							{
+								if (this.getAttribute("link")!=null)
+								{
+									if (this.getAttribute("target")!="_blank") window.location=(this.getAttribute("link"))
+									else window.open(this.getAttribute("link"))
+								}
+							}
+							arrimg[n].onmouseout=function(){smove=true;}
+							arrimg[n].onmouseover=function(){smove=false;}
+							arrimg[n].style.position="absolute";
+							imgArr.push(arrimg[n]);
+						}
+						this.roundMove=function()
+						{
+							for (n=0;n<=pn-1;n++)
+							{
+								var o=imgArr[n];
+								var ta=Math.sin(d+ed*n),strFilter;
+								if (ta<0) o.style.left=Math.cos(d+ed*n-pd)*r+x+"px";
+								else o.style.left=Math.cos(d+ed*n+pd)*r+x+"px";
+								o.style.top=ta*rh+rh+y+"px";
+								var zoom=Math.abs(Math.sin((d+ed*n)/2+pi/4))*0.5+0.5;
+								o.style.width=Math.abs(Math.cos(d+ed*n+pd)-Math.cos(d+ed*n-pd))*zoom*r+"px";
+								o.style.height=zoom*h+"px";
+								if (ta<0) {ta=(ta+1)*80+20;o.style.zIndex=0;}
+								else {ta=100;o.style.zIndex=1}
+								if (o.style.zIndex<=0) strFilter="FlipH(enabled:true)"
+								else strFilter="FlipH(enabled:false)";
+								strFilter=strFilter+" alpha(opacity="+ta+")";
+								o.style.opacity=ta/100;
+								o.style.filter=strFilter;
+							}
+							if (smove) d=d+dv;
+						}
+					}
+				</script>
+				
+				<div id="imgContainer" style="background:black; border-radius: 15px 50px ; width:830px;height:480px;border:3px solid #a1a1a1">
+					<img id="div_pointer" src="wife/z1.jpg"  link="/" target="_blank">
+					<img id="div_pointer" src="wife/z2.jpg"  link="/" target="_blank">
+					<img id="div_pointer" src="wife/z3.jpg"  link="/" target="_blank">
+					<img id="div_pointer" src="wife/z4.jpg"  link="/" target="_blank">
+					<img id="div_pointer" src="wife/z5.jpg" link="/" target="_blank">
+					<img id="div_pointer" src="wife/z6.jpg" link="/" target="_blank">
+					<img id="div_pointer" src="wife/z7.jpg" link="/" target="_blank">
+					<img id="div_pointer" src="wife/z8.jpg" link="/" target="_blank">	
+				</div>
+				</div>				
+				</div>
+			
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+	
+<!--第4页 ：鼠标控制速度照片-自己-->	
+		<div class="row">
+			<div class="col-md-12" style="width:100%;height:100%; background-image: url(img/4.jpg);
+			background-position: center center;background-size: cover;">
+
+			<div style="background-image: -webkit-linear-gradient(left,black,#66ffff 10%,#cc00ff 20%,#CC00CC 30%,
+						 #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+    					-webkit-text-fill-color: transparent;
+					    -webkit-background-clip: text;
+					    -webkit-background-size: 200% 100%; 
+					    -webkit-animation: masked-animation 4s linear infinite;
+					    font-size: 35px;"> 
+				<br><p>大脑袋貔貅远远之你家狗子真洋气</p>
+			</div> 
+			<div style="padding-left: 100px;"><h3>——传说老婆生气的时候,念此咒语有奇效</h3></div>
+			<div ><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br>
+				
+			</div>
+			<div id="contentContainer" class="trans3d"> 
+				<section id="carouselContainer" class="trans3d">
+					<figure id="item1" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z01.jpg"/></div></figure>
+					<figure id="item2" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z02.jpg"/></div></figure>
+					<figure id="item3" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z03.jpg"/></div></figure>
+					<figure id="item4" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z04.PNG"/></div></figure>
+					<figure id="item5" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z05.jpg"/></div></figure>
+					<figure id="item6" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z06.jpg"/></div></figure>
+					<figure id="item7" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z07.jpg"/></div></figure>
+					<figure id="item8" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z08.jpg"/></div></figure>
+					<figure id="item9" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z09.jpg"/></div></figure>
+					<figure id="item10" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z010.PNG"/></div></figure>
+					<figure id="item11" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z011.PNG"/></div></figure>
+					<figure id="item12" class="carouselItem trans3d"><div class="carouselItemInner trans3d"><img src="self/z012.jpg"/></div></figure>	
+				</section>
+			</div>
+			
+
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+
+<!--第5页：初相识	-->	 
+		<div class="row">
+			<div class="col-md-12" style="width:100%;height:100%;
+			background-position: center center;background-size: cover;">			
+				<img src="img/11.jpg"/>
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+
+<!--第6页：自习画	-->	 
+	<div class="row">
+		<div class="col-md-12" style="width:100%;height:100%;
+		background-position: center center;background-size: cover;">			
+			<img src="img/12.jpg"/>
+		</div>	
+	</div>
+	<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 
+<!--第7页：大悦城	-->	 
+	<div class="row">
+		<div class="col-md-12" style="width:100%;height:100%;
+		background-position: center center;background-size: cover;">			
+			<img src="img/13.jpg"/>
+		</div>	
+	</div>
+	<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;"> 
+
+<!--第8页 ：拥抱式照片  情侣照 -->
+		<div class="row">				
+			<div class="col-md-12">
+			<script type="text/javascript" src="js/ge1doot.js"></script>
+			<script type="text/javascript">
+
+			(function () {
+				/* ==== definitions ==== */
+				var diapo = [], layers = [], ctx, pointer, scr, camera, light, fps = 0, quality = [1,2],
+				// ---- poly constructor ----
+				Poly = function (parent, face) {
+					this.parent = parent;
+					this.ctx    = ctx;
+					this.color  = face.fill || false;
+					this.points = [];
+					if (!face.img) {
+						// ---- create points ----
+						for (var i = 0; i < 4; i++) {
+							this.points[i] = new ge1doot.transform3D.Point(
+								parent.pc.x + (face.x[i] * parent.normalZ) + (face.z[i] * parent.normalX),
+								parent.pc.y +  face.y[i],
+								parent.pc.z + (face.x[i] * parent.normalX) + (-face.z[i] * parent.normalZ)
+							);
+						}
+						this.points[3].next = false;
+					}
+				},
+				// ---- diapo constructor ----
+				Diapo = function (path, img, structure) {
+					// ---- create image ----
+					this.img = new ge1doot.transform3D.Image(
+						this, path + img.img, 1, {
+							isLoaded: function(img) {
+								img.parent.isLoaded = true;
+								img.parent.loaded(img);
+							}
+						}
+					);
+					this.visible  = false;
+					this.normalX  = img.nx;
+					this.normalZ  = img.nz;
+					// ---- point center ----
+					this.pc = new ge1doot.transform3D.Point(img.x, img.y, img.z);
+					// ---- target positions ----
+					this.tx = img.x + (img.nx * Math.sqrt(camera.focalLength) * 20);
+					this.tz = img.z - (img.nz * Math.sqrt(camera.focalLength) * 20);
+					// ---- create polygons ----
+					this.poly = [];
+					for (var i = -1, p; p = structure[++i];) {
+						layers[i] = (p.img === true ? 1 : 2);
+						this.poly.push(
+							new Poly(this, p)
+						);
+					}
+				},
+				// ---- init section ----
+				init = function (json) {
+					// draw poly primitive
+					Poly.prototype.drawPoly = ge1doot.transform3D.drawPoly;
+					// ---- init screen ----
+					scr = new ge1doot.Screen({
+						container: "canvas"
+					});
+					ctx = scr.ctx;
+					scr.resize();
+					// ---- init pointer ----
+					pointer = new ge1doot.Pointer({
+						tap: function () {
+							if (camera.over) {
+								if (camera.over === camera.target.elem) {
+									// ---- return to the center ----
+									camera.target.x = 0;
+									camera.target.z = 0;
+									camera.target.elem = false;
+								} else {
+									// ---- goto diapo ----
+									camera.target.elem = camera.over;
+									camera.target.x = camera.over.tx;
+									camera.target.z = camera.over.tz;
+									// ---- adapt tesselation level to distance ----
+									for (var i = 0, d; d = diapo[i++];) {
+										var dx = camera.target.x - d.pc.x;
+										var dz = camera.target.z - d.pc.z;
+										var dist = Math.sqrt(dx * dx + dz * dz);
+										var lev = (dist > 1500) ? quality[0] : quality[1];
+										d.img.setLevel(lev);
+									}
+								}
+							}
+						}
+					});
+					// ---- init camera ----
+					camera = new ge1doot.transform3D.Camera({
+						focalLength: Math.sqrt(scr.width) * 10,
+						easeTranslation: 0.025,
+						easeRotation: 0.06,
+						disableRz: true
+					}, {
+						move: function () {
+							this.over = false;
+							// ---- rotation ----
+							if (pointer.isDraging) {
+								this.target.elem = false;
+								this.target.ry = -pointer.Xi * 0.01;
+								this.target.rx = (pointer.Y - scr.height * 0.5) / (scr.height * 0.5);
+							} else {
+								if (this.target.elem) {
+									this.target.ry = Math.atan2(
+										this.target.elem.pc.x - this.x,
+										this.target.elem.pc.z - this.z
+									);
+								}
+							}
+							this.target.rx *= 0.9;
+						}
+					});
+					camera.z  = -10000;
+					camera.py = 0;
+					// ---- create images ----
+					for (var i = 0, img; img = json.imgdata[i++];) {
+						diapo.push(
+							new Diapo(
+								json.options.imagesPath, 
+								img, 
+								json.structure
+							)
+						);
+					}	
+					// ---- start engine ---- >>>
+					setInterval(function() {
+						quality = (fps > 50) ? [2,3] : [1,2];
+						fps = 0;
+					}, 1000);
+					run();
+				},
+				// ---- main loop ----
+				run = function () {
+					// ---- clear screen ----
+					ctx.clearRect(0, 0, scr.width, scr.height);
+					// ---- camera ----
+					camera.move();
+					// ---- draw layers ----
+					for (var k = -1, l; l = layers[++k];) {
+						light = false;
+						for (var i = 0, d; d = diapo[i++];) {
+							(l === 1 && d.draw()) || 
+							(d.visible && d.poly[k].draw());
+						}
+					}
+					// ---- cursor ----
+					if (camera.over && !pointer.isDraging) {
+						scr.setCursor("pointer");
+					} else {
+						scr.setCursor("move");
+					}
+					// ---- loop ----
+					fps++;
+					requestAnimFrame(run);
+				};
+				/* ==== prototypes ==== */
+				Poly.prototype.draw = function () {
+					// ---- color light ----
+					var c = this.color;
+					if (c.light || !light) {
+						var s = c.light ? this.parent.light : 1;
+						// ---- rgba color ----
+						light = "rgba(" + 
+							Math.round(c.r * s) + "," +
+							Math.round(c.g * s) + "," + 
+							Math.round(c.b * s) + "," + (c.a || 1) + ")";
+						ctx.fillStyle = light;
+					}
+					// ---- paint poly ----
+					if (!c.light || this.parent.light < 1) {
+						// ---- projection ----
+						for (
+							var i = 0; 
+							this.points[i++].projection();
+						);
+						this.drawPoly();
+						ctx.fill();
+					}
+				}
+				/* ==== image onload ==== */
+				Diapo.prototype.loaded = function (img) {
+					// ---- create points ----
+					var d = [-1,1,1,-1,1,1,-1,-1];
+					var w = img.texture.width  * 0.5;
+					var h = img.texture.height * 0.5;
+					for (var i = 0; i < 4; i++) {
+						img.points[i] = new ge1doot.transform3D.Point(
+							this.pc.x + (w * this.normalZ * d[i]),
+							this.pc.y + (h * d[i + 4]),
+							this.pc.z + (w * this.normalX * d[i])
+						);
+					}
+				}
+				/* ==== images draw ==== */
+				Diapo.prototype.draw = function () {
+					// ---- visibility ----
+					this.pc.projection();
+					if (this.pc.Z > -(camera.focalLength >> 1) && this.img.transform3D(true)) {
+						// ---- light ----
+						this.light = 0.5 + Math.abs(this.normalZ * camera.cosY - this.normalX * camera.sinY) * 0.6;
+						// ---- draw image ----
+						this.visible = true;
+						this.img.draw();
+						// ---- test pointer inside ----
+						if (pointer.hasMoved || pointer.isDown) {
+							if (
+								this.img.isPointerInside(
+									pointer.X,
+									pointer.Y
+								)
+							) camera.over = this;
+						}
+					} else this.visible = false;
+					return true;
+				}
+				return {
+					// --- load data ----
+					load : function (data) {
+						window.addEventListener('load', function () {
+							ge1doot.loadJS(
+								"js/imageTransform3D.js",
+								init, data
+							);
+						}, false);
+					}
+				}
+			})().load({
+				imgdata:[
+					// north
+					{img:'hug/q1.PNG', x:-1000, y:0, z:1500, nx:0, nz:1},
+					{img:'hug/q2.JPG', x:0,     y:0, z:1500, nx:0, nz:1},
+					{img:'hug/q3.jpg', x:1000,  y:0, z:1500, nx:0, nz:1},
+					// east
+					{img:'hug/q4.jpg', x:1500,  y:0, z:1000, nx:-1, nz:0},
+					{img:'hug/q5.JPG', x:1500,  y:0, z:0, nx:-1, nz:0},
+					{img:'hug/q6.jpg', x:1500,  y:0, z:-1000, nx:-1, nz:0},
+					// south
+					{img:'hug/q7.jpg', x:1000,  y:0, z:-1500, nx:0, nz:-1},
+					{img:'hug/q8.jpg', x:0,     y:0, z:-1500, nx:0, nz:-1},
+					{img:'hug/q9.JPG', x:-1000, y:0, z:-1500, nx:0, nz:-1},
+					// west
+					{img:'hug/q10.jpg', x:-1500, y:0, z:-1000, nx:1, nz:0},
+					{img:'hug/q11.jpg', x:-1500, y:0, z:0, nx:1, nz:0},
+					{img:'hug/q12.jpg', x:-1500, y:0, z:1000, nx:1, nz:0}
+				],
+				structure:[
+					{
+						// wall
+						fill: {r:255, g:255, b:255, light:1},
+						x: [-1001,-490,-490,-1001],
+						z: [-500,-500,-500,-500],
+						y: [500,500,-500,-500]
+					},{
+						// wall
+						fill: {r:255, g:255, b:255, light:1},
+						x: [-501,2,2,-500],
+						z: [-500,-500,-500,-500],
+						y: [500,500,-500,-500]
+					},{
+						// wall
+						fill: {r:255, g:255, b:255, light:1},
+						x: [0,502,502,0],
+						z: [-500,-500,-500,-500],
+						y: [500,500,-500,-500]
+					},{
+						// wall
+						fill: {r:255, g:255, b:255, light:1},
+						x: [490,1002,1002,490],
+						z: [-500,-500,-500,-500],
+						y: [500,500,-500,-500]
+					},{
+						// shadow
+						fill: {r:0, g:0, b:0, a:0.2},
+						x: [-420,420,420,-420],
+						z: [-500,-500,-500,-500],
+						y: [150, 150,-320,-320]
+					},{
+						// shadow
+						fill: {r:0, g:0, b:0, a:0.2},
+						x: [-20,20,20,-20],
+						z: [-500,-500,-500,-500],
+						y: [250, 250,150,150]
+					},{
+						// shadow
+						fill: {r:0, g:0, b:0, a:0.2},
+						x: [-20,20,20,-20],
+						z: [-500,-500,-500,-500],
+						y: [-320, -320,-500,-500]
+					},{
+						// shadow
+						fill: {r:0, g:0, b:0, a:0.2},
+						x: [-20,20,10,-10],
+						z: [-500,-500,-100,-100],
+						y: [-500, -500,-500,-500]
+					},{
+						// base
+						fill: {r:32, g:32, b:32},
+						x: [-50,50,50,-50],
+						z: [-150,-150,-50,-50],
+						y: [-500,-500,-500,-500]
+					},{
+						// support
+						fill: {r:16, g:16, b:16},
+						x: [-10,10,10,-10],
+						z: [-100,-100,-100,-100],
+						y: [300,300,-500,-500]
+					},{
+						// frame
+						fill: {r:255, g:255, b:255},
+						x: [-320,-320,-320,-320],
+						z: [0,-20,-20,0],
+						y: [-190,-190,190,190]
+					},{
+						// frame
+						fill: {r:255, g:255, b:255},
+						x: [320,320,320,320],
+						z: [0,-20,-20,0],
+						y: [-190,-190,190,190]
+					},
+					{img:true},
+					{
+						// ceilingLight
+						fill: {r:255, g:128, b:0},
+						x: [-50,50,50,-50],
+						z: [450,450,550,550],
+						y: [500,500,500,500]
+					},{
+						// groundLight
+						fill: {r:255, g:128, b:0},
+						x: [-50,50,50,-50],
+						z: [450,450,550,550],
+						y: [-500,-500,-500,-500]
+					}
+				],
+				options:{
+					imagesPath: ""
+				}
+			});
+			</script>
+
+			<canvas id="canvas"></canvas>
+			
+			</div>
+		</div>	
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+	
+<!--第9页:悬挂式照片  情侣照  -->	
+		<div class="row">
+		<div class="col-md-12" style="width:100%;height:800px; background-image: url(img/6.jpg);
+			background-position: center center;background-size: cover;">	
+
+			<style type="text/css">
+			.tainer6 img{position:absolute;padding:10px 10px 15px;background:#fff;border:1px solid #ddd;
+						-webkit-transition:1s ;-moz-transition:1s ;transition:1s ;z-index:1;}
+			.tainer6 img:hover{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);transform:rotate(0deg);
+							-webkit-transform:scale(1.1);-moz-transform:scale(1.1);transform:scale(1.1);-webkit-box-shadow:5px 5px 5px #ddd;
+							-moz-box-shadow:5px 5px 5px #ddd;box-shadow:5px 5px 5px #ddd;z-index:2;cursor:pointer;}
+			.pic6{top:0;left:0;-webkit-transform:rotate(10deg);-moz-transform:rotate(10deg);transform:rotate(10deg);}
+			.pic10{left:180px;top:20px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic15{left:0px;top:0px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic1{top:0px;left:400px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic9{top:90px;left:550px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic2{top:0px;left:600px;-webkit-transform:rotate(-20deg);-moz-transform:rotate(-20deg);transform:rotate(-20deg);}
+			.pic7{top:0;left:850px;-webkit-transform:rotate(20deg);-moz-transform:rotate(20deg);transform:rotate(20deg);}
+			.pic11{top:0;left:1050px;-webkit-transform:rotate(15deg);-moz-transform:rotate(-5deg);transform:rotate(10deg);}
+			
+			.pic5{bottom:0;left:0;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic13{bottom:0;left:200;-webkit-transform:rotate(-50deg);-moz-transform:rotate(-15deg);transform:rotate(-15deg);}
+			.pic4{bottom:0;left:300px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic8{bottom:-20px;right:630px;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			.pic14{bottom:-20px;right:230px;-webkit-transform:rotate(50deg);-moz-transform:rotate(5deg);transform:rotate(10deg);}
+			.pic12{bottom:10px;right:330px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic3{bottom:0;right:0;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			
+			
+			</style>
+
+			<div class="tainer6">
+				<img src="suspend/q21.PNG" class="pic13"  />
+				<img src="suspend/q34.jpg" class="pic14"  />
+				<img src="suspend/q35.jpg" class="pic15"  />
+				
+				<img src="suspend/q21.PNG" class="pic1"  />
+				<img src="suspend/q22.PNG" class="pic2"  />
+				<img src="suspend/q23.PNG" class="pic3"  />
+				<img src="suspend/q24.PNG" class="pic4"  />
+				<img src="suspend/q25.PNG" class="pic5"  />
+				<img src="suspend/q26.PNG" class="pic6"  />
+				<img src="suspend/q27.PNG" class="pic7"  />
+				<img src="suspend/q28.PNG" class="pic8"  />
+				<img src="suspend/q29.PNG" class="pic9"  />
+				<img src="suspend/q30.PNG" class="pic10"  />
+				<img src="suspend/q31.PNG" class="pic11"  />
+				<img src="suspend/q32.PNG" class="pic12"  />
+				
+				
+			</div>
+
+		</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+	
+<!--第10页:悬挂式照片  生日情人节  -->	
+		<div class="row">
+		<div class="col-md-12" style="width:100%;height:800px; background-image: url(img/14.jpg);
+			background-position: center center;background-size: cover;">	
+
+			<style type="text/css">
+			.tainer6 img{position:absolute;padding:10px 10px 15px;background:#fff;border:1px solid #ddd;
+						-webkit-transition:1s ;-moz-transition:1s ;transition:1s ;z-index:1;}
+			.tainer6 img:hover{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);transform:rotate(0deg);
+							-webkit-transform:scale(1.1);-moz-transform:scale(1.1);transform:scale(1.1);-webkit-box-shadow:5px 5px 5px #ddd;
+							-moz-box-shadow:5px 5px 5px #ddd;box-shadow:5px 5px 5px #ddd;z-index:2;cursor:pointer;}
+			.pic6{top:0;left:0;-webkit-transform:rotate(10deg);-moz-transform:rotate(10deg);transform:rotate(10deg);}
+			.pic10{left:180px;top:20px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic15{left:0px;top:0px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic1{top:0px;left:400px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic9{top:90px;left:550px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic2{top:0px;left:600px;-webkit-transform:rotate(-20deg);-moz-transform:rotate(-20deg);transform:rotate(-20deg);}
+			.pic7{top:0;left:850px;-webkit-transform:rotate(20deg);-moz-transform:rotate(20deg);transform:rotate(20deg);}
+			.pic11{top:0;left:1050px;-webkit-transform:rotate(15deg);-moz-transform:rotate(-5deg);transform:rotate(10deg);}
+			
+			.pic5{bottom:0;left:0;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic13{bottom:0;left:400;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-10deg);transform:rotate(-15deg);}
+			.pic4{bottom:0;left:300px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic8{bottom:-20px;right:630px;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			.pic14{bottom:-20px;right:230px;-webkit-transform:rotate(50deg);-moz-transform:rotate(5deg);transform:rotate(10deg);}
+			.pic12{bottom:10px;right:330px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic3{bottom:0;right:0;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			</style>
+			
+			<div class="tainer6">
+				<img src="valentine/1.jpg" class="pic13"  />
+				<img src="valentine/2.jpg" class="pic14"  />
+				<img src="valentine/3.jpg" class="pic15"  />				
+				<img src="valentine/4.jpg" class="pic1"  />
+				<img src="valentine/5.JPG" class="pic2"  />
+				<img src="valentine/6.jpg" class="pic3"  />
+				<img src="valentine/8.JPG" class="pic4"  />
+				<img src="valentine/7.JPG" class="pic5"  />
+				<img src="valentine/9.JPG" class="pic6"  />
+				<img src="valentine/12.JPG" class="pic7"  />
+				<img src="valentine/11.JPG" class="pic8"  />
+				<img src="valentine/10.JPG" class="pic9"  />
+				<img src="valentine/13.JPG" class="pic10"  />
+				<img src="valentine/14.PNG" class="pic11"  />
+				<img src="valentine/15.PNG" class="pic12"  />		
+			</div>
+		</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 	
+<!--第11页:悬挂式照片  聊天截图  -->	
+		<div class="row">
+		<div class="col-md-12" style="width:100%;height:800px; background-image: url(img/15.jpg);
+			background-position: center center;background-size: cover;">	
+
+			<style type="text/css">
+			.tainer6 img{position:absolute;padding:10px 10px 15px;background:#fff;border:1px solid #ddd;
+						-webkit-transition:1s ;-moz-transition:1s ;transition:1s ;z-index:1;}
+			.tainer6 img:hover{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);transform:rotate(0deg);
+							-webkit-transform:scale(1.1);-moz-transform:scale(1.1);transform:scale(1.1);-webkit-box-shadow:5px 5px 5px #ddd;
+							-moz-box-shadow:5px 5px 5px #ddd;box-shadow:5px 5px 5px #ddd;z-index:2;cursor:pointer;}
+			.pic6{top:0;left:0;-webkit-transform:rotate(10deg);-moz-transform:rotate(10deg);transform:rotate(10deg);}
+			.pic10{left:180px;top:20px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic15{left:0px;top:0px;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic1{top:0px;left:400px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic9{top:90px;left:550px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic2{top:0px;left:600px;-webkit-transform:rotate(-20deg);-moz-transform:rotate(-20deg);transform:rotate(-20deg);}
+			.pic7{top:0;left:850px;-webkit-transform:rotate(20deg);-moz-transform:rotate(20deg);transform:rotate(20deg);}
+			.pic11{top:0;left:1050px;-webkit-transform:rotate(15deg);-moz-transform:rotate(-5deg);transform:rotate(10deg);}
+			
+			.pic5{bottom:0;left:0;-webkit-transform:rotate(-10deg);-moz-transform:rotate(-10deg);transform:rotate(-10deg);}
+			.pic13{bottom:0;left:400;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-10deg);transform:rotate(-15deg);}
+			.pic4{bottom:0;left:300px;-webkit-transform:rotate(-5deg);-moz-transform:rotate(-5deg);transform:rotate(-5deg);}
+			.pic8{bottom:-20px;right:630px;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			.pic14{bottom:-20px;right:230px;-webkit-transform:rotate(50deg);-moz-transform:rotate(5deg);transform:rotate(10deg);}
+			.pic12{bottom:10px;right:330px;-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);transform:rotate(15deg);}
+			.pic3{bottom:0;right:0;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);transform:rotate(5deg);}
+			</style>
+			
+			<div class="tainer6">
+				<img src="chatcut/1.JPG" class="pic13"  />
+				<img src="chatcut/2.jpg" class="pic14"  />
+				<img src="chatcut3.jpg" class="pic15"  />				
+				<img src="chatcut/4.jpg" class="pic1"  />
+				<img src="chatcut/5.jpg" class="pic2"  />
+				<img src="chatcut/6.jpg" class="pic3"  />
+				<img src="chatcut/7.jpg" class="pic4"  />
+				<img src="chatcut/8.jpg" class="pic5"  />
+				<img src="chatcut/9.jpg" class="pic6"  />
+				<img src="chatcut/10.jpg" class="pic7"  />
+				<img src="chatcut/11.jpg" class="pic8"  />
+				<img src="chatcut/12.JPG" class="pic9"  />
+				<img src="chatcut/13.PNG" class="pic10"  />
+				<img src="chatcut/14.JPG" class="pic11"  />
+				<img src="chatcut/15.JPG" class="pic12"  />		
+			</div>
+		</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 	
+ <!--第12页 ：平铺合成  吃饭-->	 
+		<div class="row">
+			<div class="col-md-12" style="width:100%;height:100%; background-image: url(img/7.jpg);
+			background-position: center center;background-size: cover;">
+			
+		 	<iframe frameborder="0" scrolling="no" src="indexpin.html" width="100%" height="600px"></iframe>	
+
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+
+
+<!--第13页 ：平铺颤抖  视频截图-->
+		<div class="row">
+			<div class="col-md-12" style="width:100%;height:800px; background-image: url(img/8.jpg);
+			background-position: center center;background-size: cover;">
+
+			<div id="diapoContainer">
+				<img class="imgsrc" alt="夸我美" src="SPjietu/01.jpg"/>
+				<img class="imgsrc" alt="宝宝不愿意" src="SPjietu/02.jpg"/>
+				<img class="imgsrc" alt="我有俩小辫扎" src="SPjietu/03.jpg"/>
+				<img class="imgsrc" alt="我的小酒窝最性感" src="SPjietu/04.jpg"/>
+				<img class="imgsrc" alt="宝不想和你说话" src="SPjietu/05.jpg"/>
+				<img class="imgsrc" alt="妩媚" src="SPjietu/06.PNG"/>
+				<img class="imgsrc" alt="老公~~~" src="SPjietu/07.PNG"/>
+				<img class="imgsrc" alt="不管，宝最可爱" src="SPjietu/08.jpg"/>
+				<img class="imgsrc" alt="敲可爱" src="SPjietu/09.jpg"/>
+				<img class="imgsrc" alt="敲温柔" src="SPjietu/1.jpg"/>				
+				<img class="imgsrc" alt="要亲亲抱抱举高高" src="SPjietu/11.jpg"/>
+				<img class="imgsrc" alt="头上棒槌" src="SPjietu/12.jpg"/>
+				<img class="imgsrc" alt="鼻孔吓不吓人" src="SPjietu/13.jpg"/>
+				<img class="imgsrc" alt="敲贤惠" src="SPjietu/14.jpg"/>
+				<img class="imgsrc" alt="闭月羞花" src="SPjietu/15.jpg"/>
+				<img class="imgsrc" alt="香的，不信你闻" src="SPjietu/16.PNG"/>
+				<img class="imgsrc" alt="少女小脸儿红扑扑" src="SPjietu/17.jpg"/>
+				<img class="imgsrc" alt="善良大方" src="SPjietu/18.jpg"/>
+				<img class="imgsrc" alt="小野猫" src="SPjietu/19.jpg"/>
+				<img class="imgsrc" alt="今晚我和儿子睡，你走" src="SPjietu/20.jpg"/>				
+				<img class="imgsrc" alt="一家三口" src="SPjietu/21.jpg"/>
+				<img class="imgsrc" alt="我是精致的猪猪女孩" src="SPjietu/22.jpg"/>
+				<img class="imgsrc" alt="撒娇天真" src="SPjietu/23.jpg"/>
+				<img class="imgsrc" alt="端庄体贴" src="SPjietu/24.jpg"/>
+				<img class="imgsrc" alt="温婉贤淑" src="SPjietu/25.jpg"/>
+				<img class="imgsrc" alt="率真多才" src="SPjietu/26.jpg"/>
+				<img class="imgsrc" alt="叫大爷" src="SPjietu/27.jpg"/>	
+				<div id="bkgcaption"></div>
+				<div id="caption"></div>
+			</div>
+			
+			<style type="text/css">
+				/*平铺抖动*/
+				#diapoContainer{position:absolute;width:80%;background:#222;height:80%;overflow:hidden;top:10%;left:10%}
+				.imgDC{border-bottom:#000 2px solid;position:absolute;filter:alpha(opacity=90);border-left:#000 2px solid;
+						visibility:hidden;border-top:#000 2px solid;cursor:pointer;border-right:#000 2px solid;opacity:0.3}
+				.spaDC{position:absolute;filter:alpha(opacity=20);background:#000;visibility:hidden;opacity:0.4}
+				.imgsrc{position:absolute;margin:2%;width:67px;height:120px;visibility:hidden}
+				#bkgcaption{position:absolute;width:100%;bottom:0px;background:#1a1a1a;height:6%;left:0px}
+				#caption{position:absolute;text-align:center;width:100%;bottom:0px;font-family:arial, helvetica, verdana, sans-serif;
+						white-space:nowrap;color:#fff;left:-10px}
+			</style>
+			
+			
+			<script type="text/javascript" >
+					var xm;
+				var ym;
+				
+				/* ==== onmousemove event ==== */
+				document.onmousemove = function(e){
+					if(window.event) e=window.event;
+					xm = (e.x || e.clientX);
+					ym = (e.y || e.clientY);
+				}
+				
+				/* ==== window resize ==== */
+				function resize() {
+					if(diapo)diapo.resize();
+				}
+				onresize = resize;
+				
+				/* ==== opacity ==== */
+				setOpacity = function(o, alpha){
+					if(o.filters)o.filters.alpha.opacity = alpha * 100; else o.style.opacity = alpha;
+				}
+				
+				
+				////////////////////////////////////////////////////////////////////////////////////////////
+				/* ===== encapsulate script ==== */
+				diapo = {
+					O : [],
+					DC : 0,
+					img : 0,
+					txt : 0,
+					N : 0,
+					xm : 0,
+					ym : 0,
+					nx : 0,
+					ny : 0,
+					nw : 0,
+					nh : 0,
+					rs : 0,
+					rsB : 0,
+					zo : 0,
+					tx_pos : 0,
+					tx_var : 0,
+					tx_target : 0,
+				
+					/////// script parameters ////////
+					attraction : 2,
+					acceleration : .9,
+					dampening : .1,
+					zoomOver : 2,
+					zoomClick : 6,
+					transparency : .8,
+					font_size: 18,
+					//////////////////////////////////
+				
+					/* ==== diapo resize ==== */
+					resize : function(){
+						with(this){
+							nx = DC.offsetLeft;
+							ny = DC.offsetTop;
+							nw = DC.offsetWidth;
+							nh = DC.offsetHeight;
+							txt.style.fontSize = Math.round(nh / font_size) + "px";
+							if(Math.abs(rs-rsB)<100) for(var i=0; i<N; i++) O[i].resize();
+							rsB = rs;
+						}
+					},
+				
+					/* ==== create diapo ==== */
+					CDiapo : function(o){
+						/* ==== init variables ==== */
+						this.o        = o;
+						this.x_pos    = this.y_pos    = 0;
+						this.x_origin = this.y_origin = 0;
+						this.x_var    = this.y_var    = 0;
+						this.x_target = this.y_target = 0;
+						this.w_pos    = this.h_pos    = 0;
+						this.w_origin = this.h_origin = 0;
+						this.w_var    = this.h_var    = 0;
+						this.w_target = this.h_target = 0;
+						this.over     = false;
+						this.click    = false;
+				
+						/* ==== create shadow ==== */
+						this.spa = document.createElement("span");
+						this.spa.className = "spaDC";
+						diapo.DC.appendChild(this.spa);
+				
+						/* ==== create thumbnail image ==== */
+						this.img = document.createElement("img");
+						this.img.className = "imgDC";
+						this.img.src = o.src;
+						this.img.O = this;
+						diapo.DC.appendChild(this.img);
+						setOpacity(this.img, diapo.transparency);
+				
+						/* ==== mouse events ==== */
+						this.img.onselectstart = new Function("return false;");
+						this.img.ondrag = new Function("return false;");
+						this.img.onmouseover = function(){
+							diapo.tx_target=0;
+							diapo.txt.innerHTML=this.O.o.alt;
+							this.O.over=true;
+							setOpacity(this,this.O.click?diapo.transparency:1);
+						}
+						this.img.onmouseout = function(){
+							diapo.tx_target=-diapo.nw;
+							this.O.over=false;
+							setOpacity(this,diapo.transparency);
+						}
+						this.img.onclick = function() {
+							if(!this.O.click){
+								if(diapo.zo && diapo.zo != this) diapo.zo.onclick();
+								this.O.click = true;
+								this.O.x_origin = (diapo.nw - (this.O.w_origin * diapo.zoomClick)) / 2;
+								this.O.y_origin = (diapo.nh - (this.O.h_origin * diapo.zoomClick)) / 2;
+								diapo.zo = this;
+								setOpacity(this,diapo.transparency);
+							} else {
+								this.O.click = false;
+								this.O.over = false;
+								this.O.resize();
+								diapo.zo = 0;
+							}
+						}
+				
+						/* ==== rearrange thumbnails based on "imgsrc" images position ==== */
+						this.resize = function (){
+							with (this) {
+								x_origin = o.offsetLeft;
+								y_origin = o.offsetTop;
+								w_origin = o.offsetWidth;
+								h_origin = o.offsetHeight;
+							}
+						}
+				
+						/* ==== animation function ==== */
+						this.position = function (){
+							with (this) {
+								/* ==== set target position ==== */
+								w_target = w_origin;
+								h_target = h_origin;
+								if(over){
+									/* ==== mouse over ==== */
+									w_target = w_origin * diapo.zoomOver;
+									h_target = h_origin * diapo.zoomOver;
+									x_target = diapo.xm - w_pos / 2 - (diapo.xm - (x_origin + w_pos / 2)) / (diapo.attraction*(click?10:1));
+									y_target = diapo.ym - h_pos / 2 - (diapo.ym - (y_origin + h_pos / 2)) / (diapo.attraction*(click?10:1));
+								} else {
+									/* ==== mouse out ==== */
+									x_target = x_origin;
+									y_target = y_origin;
+								}
+								if(click){
+									/* ==== clicked ==== */
+									w_target = w_origin * diapo.zoomClick;
+									h_target = h_origin * diapo.zoomClick;
+								}
+				
+								/* ==== magic spring equations ==== */
+								x_pos += x_var = x_var * diapo.acceleration + (x_target - x_pos) * diapo.dampening;
+								y_pos += y_var = y_var * diapo.acceleration + (y_target - y_pos) * diapo.dampening;
+								w_pos += w_var = w_var * (diapo.acceleration * .5) + (w_target - w_pos) * (diapo.dampening * .5);
+								h_pos += h_var = h_var * (diapo.acceleration * .5) + (h_target - h_pos) * (diapo.dampening * .5);
+								diapo.rs += (Math.abs(x_var) + Math.abs(y_var));
+				
+								/* ==== html animation ==== */
+								with(img.style){
+									left   = Math.round(x_pos) + "px";
+									top    = Math.round(y_pos) + "px";
+									width  = Math.round(Math.max(0, w_pos)) + "px";
+									height = Math.round(Math.max(0, h_pos)) + "px";
+									zIndex = Math.round(w_pos);
+								}
+								with(spa.style){
+									left   = Math.round(x_pos + w_pos * .1) + "px";
+									top    = Math.round(y_pos + h_pos * .1) + "px";
+									width  = Math.round(Math.max(0, w_pos * 1.1)) + "px";
+									height = Math.round(Math.max(0, h_pos * 1.1)) + "px";
+									zIndex = Math.round(w_pos);
+								}
+							}
+						}
+					},
+				
+					/* ==== main loop ==== */
+					run : function(){
+						diapo.xm = xm - diapo.nx;
+						diapo.ym = ym - diapo.ny;
+						/* ==== caption anim ==== */
+						diapo.tx_pos += diapo.tx_var = diapo.tx_var * .9 + (diapo.tx_target - diapo.tx_pos) * .02;
+						diapo.txt.style.left = Math.round(diapo.tx_pos) + "px";
+						/* ==== images anim ==== */
+						for(var i in diapo.O) diapo.O[i].position();
+						/* ==== loop ==== */
+						setTimeout("diapo.run();", 16);
+					},
+				
+					/* ==== load images ==== */
+					images_load : function(){
+						// ===== loop until all images are loaded =====
+						var M = 0;
+						for(var i=0; i<diapo.N; i++) {
+							if(diapo.img[i].complete) {
+								diapo.img[i].style.position = "relative";
+								diapo.O[i].img.style.visibility = "visible";
+								diapo.O[i].spa.style.visibility = "visible";
+								M++;
+							}
+							resize();
+						}
+						if(M<diapo.N) setTimeout("diapo.images_load();", 128);
+					},
+				
+					/* ==== init script ==== */
+					init : function() {
+						diapo.DC = document.getElementById("diapoContainer");
+						diapo.img = diapo.DC.getElementsByTagName("img");
+						diapo.txt = document.getElementById("caption");
+						diapo.N = diapo.img.length;
+						for(i=0; i<diapo.N; i++) diapo.O.push(new diapo.CDiapo(diapo.img[i]));
+						diapo.resize();
+						diapo.tx_pos = -diapo.nw;
+						diapo.tx_target = -diapo.nw;
+						diapo.images_load();
+						diapo.run();
+					}
+				}
+				
+				/* ==== start script ==== */
+				function dom_onload() {
+					if(document.getElementById("diapoContainer")) diapo.init(); else setTimeout("dom_onload();", 128);
+				}
+				dom_onload();		
+			</script>	
+			
+			
+			
+			
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+		
+<!--第14页：点我  自拍平铺固定	-->	 
+	<div class="row">
+		<div class="col-md-12" style="width:100%;height:800px;background-image: url(img/16.jpg);
+		background-position: center center;background-size: cover;">			
+
+		<div class="col-md-12" style="width:100%;height:700px;"></div>
+		<div class="col-md-4" ></div>
+		<div class="col-md-2" >
+			<a href="tanhuang.html" class="cta_button">
+				<button type="button" class="btn btn-danger;btn btn-primary btn-lg">&nbsp;&nbsp;点我&nbsp;&nbsp;</button>
+			</a>
+		</div>
+		<div class="col-md-6" >
+			<a href="rain.html" class="cta_button">
+				<button type="button" class="btn btn-danger;btn btn-primary btn-lg">&nbsp;&nbsp;点我&nbsp;&nbsp;</button>
+			</a>	
+			
+		</div>
+		</div>	
+	</div>
+	<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 
+ <!--第15页  :小视频-->	
+		<div class="row">
+			<div class="col-md-12" style="width:1349px;height:701px; background-image: url(img/18.jpg);
+			background-position: center center;background-size: cover;">
+			
+				<div class="col-md-6">
+					<video src="img/video/1.MP4" controls="controls" height="500" width="300"></video>
+					<video src="img/video/8.MP4" controls="controls" height="500" width="300"></video>
+				</div>	 
+				<div class="col-md-6">
+					<video src="img/video/2.mp4" controls="controls"></video>
+					 <video src="img/video/3.MP4" controls="controls" height="500" width="300"></video>
+				</div>
+				<div class="col-md-8"></div>
+				<div class="col-md-4"><h1 style="color: red;">仙女儿平常的生活是介个样子滴 ——点击观看</h1></div>
+			
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+
+  <!--第16页  :小视频-->	
+		<div class="row">
+			<div class="col-md-12" style="width:1349px;height:701px; background-image: url(img/10.jpg);
+			background-position: center center;background-size: cover;">
+			
+				<div class="col-md-5">
+					<div class="col-md-12">
+						<video src="img/video/4.MP4" controls="controls" height="320" width="450"></video>
+					</div>
+					<div class="col-md-12">
+						<video src="img/video/6.MP4" controls="controls" height="320" width="450"></video>
+					</div>	
+				</div>	
+				
+				<div class="col-md-7">
+					<video src="img/video/5.MP4" controls="controls" height="430" width="230"></video>
+					 <video src="img/video/7.MP4" controls="controls" height="430" width="230"></video>
+					 <video src="img/video/9.MP4" controls="controls" height="430" width="230"></video>
+				</div>
+				<div class="col-md-8"></div>
+				<div class="col-md-4"></div>
+			
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 
+ <!--第17页：牵手走到最后-->	 
+	<div class="row">
+		<div class="col-md-12" style="width:100%;height:800px;background-image: url(img/17.jpg);
+		background-position: center center;background-size: cover;">			
+
+		</div>	
+	</div>
+	<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+ 
+<!--第999页  ：心尾页-->	
+		<div class="row">
+		<div class="col-md-12" style="width:100%;height:100%;background-position: center center;background-size: cover;">
+
+
+		<canvas id="heart" ></canvas>
+		<script>
+		    window.requestAnimationFrame =
+		    window.__requestAnimationFrame ||
+		        window.requestAnimationFrame ||
+		        window.webkitRequestAnimationFrame ||
+		        window.mozRequestAnimationFrame ||
+		        window.oRequestAnimationFrame ||
+		        window.msRequestAnimationFrame ||
+		        (function () {
+		            return function (callback, element) {
+		                var lastTime = element.__lastTime;
+		                if (lastTime === undefined) {
+		                    lastTime = 0;
+		                }
+		                var currTime = Date.now();
+		                var timeToCall = Math.max(1, 33 - (currTime - lastTime));
+		                window.setTimeout(callback, timeToCall);
+		                element.__lastTime = currTime + timeToCall;
+		            };
+		        })();
+		window.isDevice = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(((navigator.userAgent || navigator.vendor || window.opera)).toLowerCase()));
+		var loaded = false;
+		var init = function () {
+		    if (loaded) return;
+		    loaded = true;
+		    var mobile = window.isDevice;
+		    var koef = mobile ? 0.5 : 1;
+		    var canvas = document.getElementById('heart');
+		    var ctx = canvas.getContext('2d');
+		    var width = canvas.width = koef * innerWidth;
+		    var height = canvas.height = koef * innerHeight;
+		    var rand = Math.random;
+		    ctx.fillStyle = "rgba(0,0,0,1)";
+		    ctx.fillRect(0, 0, width, height);
+		    var heartPosition = function (rad) {
+		        //return [Math.sin(rad), Math.cos(rad)];
+		        return [Math.pow(Math.sin(rad), 3), -(15 * Math.cos(rad) - 5 * Math.cos(2 * rad) - 2 * Math.cos(3 * rad) - Math.cos(4 * rad))];
+		    };
+		    var scaleAndTranslate = function (pos, sx, sy, dx, dy) {
+		        return [dx + pos[0] * sx, dy + pos[1] * sy];
+		    };
+		    window.addEventListener('resize', function () {
+		        width = canvas.width = koef * innerWidth;
+		        height = canvas.height = koef * innerHeight;
+		        ctx.fillStyle = "rgba(0,0,0,1)";
+		        ctx.fillRect(0, 0, width, height);
+		    });
+		    var traceCount = mobile ? 20 : 50;
+		    var pointsOrigin = [];
+		    var i;
+		    var dr = mobile ? 0.3 : 0.1;
+		    for (i = 0; i < Math.PI * 2; i += dr) pointsOrigin.push(scaleAndTranslate(heartPosition(i), 210, 13, 0, 0));
+		    for (i = 0; i < Math.PI * 2; i += dr) pointsOrigin.push(scaleAndTranslate(heartPosition(i), 150, 9, 0, 0));
+		    for (i = 0; i < Math.PI * 2; i += dr) pointsOrigin.push(scaleAndTranslate(heartPosition(i), 90, 5, 0, 0));
+		    var heartPointsCount = pointsOrigin.length;
+		    var targetPoints = [];
+		    var pulse = function (kx, ky) {
+		        for (i = 0; i < pointsOrigin.length; i++) {
+		            targetPoints[i] = [];
+		            targetPoints[i][0] = kx * pointsOrigin[i][0] + width / 2;
+		            targetPoints[i][1] = ky * pointsOrigin[i][1] + height / 2;
+		        }
+		    };
+		    var e = [];
+		    for (i = 0; i < heartPointsCount; i++) {
+		        var x = rand() * width;
+		        var y = rand() * height;
+		        e[i] = {
+		            vx: 0,
+		            vy: 0,
+		            R: 2,
+		            speed: rand() + 5,
+		            q: ~~(rand() * heartPointsCount),
+		            D: 2 * (i % 2) - 1,
+		            force: 0.2 * rand() + 0.7,
+		            f: "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)",
+		            trace: []
+		        };
+		        for (var k = 0; k < traceCount; k++) e[i].trace[k] = {x: x, y: y};
+		    }
+		    var config = {
+		        traceK: 0.4,
+		        timeDelta: 0.01
+		    };
+		    var time = 0;
+		    var loop = function () {
+		        var n = -Math.cos(time);
+		        pulse((1 + n) * .5, (1 + n) * .5);
+		        time += ((Math.sin(time)) < 0 ? 9 : (n > 0.8) ? .2 : 1) * config.timeDelta;
+		        ctx.fillStyle = "rgba(0,0,0,.1)";
+		        ctx.fillRect(0, 0, width, height);
+		        for (i = e.length; i--;) {
+		            var u = e[i];
+		            var q = targetPoints[u.q];
+		            var dx = u.trace[0].x - q[0];
+		            var dy = u.trace[0].y - q[1];
+		            var length = Math.sqrt(dx * dx + dy * dy);
+		            if (10 > length) {
+		                if (0.95 < rand()) {
+		                    u.q = ~~(rand() * heartPointsCount);
+		                }
+		                else {
+		                    if (0.99 < rand()) {
+		                        u.D *= -1;
+		                    }
+		                    u.q += u.D;
+		                    u.q %= heartPointsCount;
+		                    if (0 > u.q) {
+		                        u.q += heartPointsCount;
+		                    }
+		                }
+		            }
+		            u.vx += -dx / length * u.speed;
+		            u.vy += -dy / length * u.speed;
+		            u.trace[0].x += u.vx;
+		            u.trace[0].y += u.vy;
+		            u.vx *= u.force;
+		            u.vy *= u.force;
+		            for (k = 0; k < u.trace.length - 1;) {
+		                var T = u.trace[k];
+		                var N = u.trace[++k];
+		                N.x -= config.traceK * (N.x - T.x);
+		                N.y -= config.traceK * (N.y - T.y);
+		            }
+		            ctx.fillStyle = u.f;
+		            for (k = 0; k < u.trace.length; k++) {
+		                ctx.fillRect(u.trace[k].x, u.trace[k].y, 1, 1);
+		            }
+		        }
+		        //ctx.fillStyle = "rgba(255,255,255,1)";
+		        //for (i = u.trace.length; i--;) ctx.fillRect(targetPoints[i][0], targetPoints[i][1], 2, 2);
+		        window.requestAnimationFrame(loop, canvas);
+		    };
+		    loop();
+		};
+		var s = document.readyState;
+		if (s === 'complete' || s === 'loaded' || s === 'interactive') init();
+		else document.addEventListener('DOMContentLoaded', init, false);
+		</script>
+
+			</div>	
+		</div>
+		
+
+
+
+<!--第7页  
+		<div class="row">
+			<div class="col-md-12" style="width:1349px;height:701px; background-image: url(img/7.jpg);
+			background-position: center center;background-size: cover;">
+			</div>	
+		</div>
+		<hr style="margin-right: 115px;margin-left: 115px; border-top: 2px solid #00fa;">
+-->		
+
+
+
+
+	</div>
+</body>
+</html>
